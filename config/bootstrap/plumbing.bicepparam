@@ -12,7 +12,7 @@ param location = 'swedencentral'
 param githubOrg = 'ExjobbOA'
 
 @description('Customer/config repo name (THIS repo name in GitHub). Change if your customer repo is renamed.')
-param moduleRepo = 'alz-mgmt'
+param moduleRepo = 'alz-mgmt-oskar'
 
 @description('Templates/engine repo name (where reusable workflows live).')
 param templatesRepo = 'alz-mgmt-templates'
