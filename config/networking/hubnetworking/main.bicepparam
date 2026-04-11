@@ -40,22 +40,36 @@ param hubNetworks = [
         useRemoteGateways: false
       }
     ]
-    // Subnets are omitted because all hub resources are disabled (deployAzureFirewall,
-    // deployBastion, deployVpnGateway, deployExpressRouteGateway, deployDnsPrivateResolver
-    // are all false). ALZ policy requires every subnet to have an NSG, so pre-creating
-    // placeholder subnets for undeployed resources would fail policy validation.
-    //
-    // To re-enable subnets when enabling a resource, add the relevant entry and set the
-    // corresponding deploy* flag to true:
-    //   { name: 'AzureFirewallSubnet',           addressPrefix: '10.0.0.0/26'   }  // + deployAzureFirewall: true
-    //   { name: 'AzureFirewallManagementSubnet',  addressPrefix: '10.0.0.192/26' }  // + deployAzureFirewall: true (Standard/Premium tier)
-    //   { name: 'AzureBastionSubnet',             addressPrefix: '10.0.0.64/26'  }  // + deployBastion: true
-    //   { name: 'GatewaySubnet',                  addressPrefix: '10.0.0.128/27' }  // + deployVpnGateway or deployExpressRouteGateway: true
-    //   { name: 'DNSPrivateResolverInboundSubnet',  addressPrefix: '10.0.0.160/28', delegation: 'Microsoft.Network/dnsResolvers' }  // + deployDnsPrivateResolver: true
-    //   { name: 'DNSPrivateResolverOutboundSubnet', addressPrefix: '10.0.0.176/28', delegation: 'Microsoft.Network/dnsResolvers' }  // + deployDnsPrivateResolver: true
-    subnets: []
+    subnets: [
+      {
+        name: 'AzureBastionSubnet'
+        addressPrefix: '10.0.0.64/26'
+      }
+      {
+        name: 'GatewaySubnet'
+        addressPrefix: '10.0.0.128/27'
+      }
+      {
+        name: 'AzureFirewallSubnet'
+        addressPrefix: '10.0.0.0/26'
+      }
+      {
+        name: 'AzureFirewallManagementSubnet'
+        addressPrefix: '10.0.0.192/26'
+      }
+      {
+        name: 'DNSPrivateResolverInboundSubnet'
+        addressPrefix: '10.0.0.160/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+      {
+        name: 'DNSPrivateResolverOutboundSubnet'
+        addressPrefix: '10.0.0.176/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+    ]
     azureFirewallSettings: {
-      deployAzureFirewall: false
+      deployAzureFirewall: true
       azureFirewallName: 'afw-alz-${location}'
       azureSkuTier: 'Standard'
       publicIPAddressObject: {
@@ -66,12 +80,12 @@ param hubNetworks = [
       }
     }
     bastionHostSettings: {
-      deployBastion: false
+      deployBastion: true
       bastionHostSettingsName: 'bas-alz-${location}'
       skuName: 'Standard'
     }
     vpnGatewaySettings: {
-      deployVpnGateway: false
+      deployVpnGateway: true
       name: 'vgw-alz-${location}'
       skuName: 'VpnGw1AZ'
       vpnMode: 'activeActiveBgp'
@@ -79,17 +93,17 @@ param hubNetworks = [
       asn: 65515
     }
     expressRouteGatewaySettings: {
-      deployExpressRouteGateway: false
+      deployExpressRouteGateway: true
       name: 'ergw-alz-${location}'
     }
     privateDnsSettings: {
-      deployPrivateDnsZones: false
-      deployDnsPrivateResolver: false
+      deployPrivateDnsZones: true
+      deployDnsPrivateResolver: true
       privateDnsResolverName: 'dnspr-alz-${location}'
       privateDnsZones: []
     }
     ddosProtectionPlanSettings: {
-      deployDdosProtectionPlan: false
+      deployDdosProtectionPlan: true
       name: 'ddos-alz-${location}'
     }
   }
@@ -110,10 +124,36 @@ param hubNetworks = [
         useRemoteGateways: false
       }
     ]
-    // See primary hub above for subnet reference — same logic applies (10.1.x.x range).
-    subnets: []
+    subnets: [
+      {
+        name: 'AzureBastionSubnet'
+        addressPrefix: '10.1.0.64/26'
+      }
+      {
+        name: 'GatewaySubnet'
+        addressPrefix: '10.1.0.128/27'
+      }
+      {
+        name: 'AzureFirewallSubnet'
+        addressPrefix: '10.1.0.0/26'
+      }
+      {
+        name: 'AzureFirewallManagementSubnet'
+        addressPrefix: '10.1.0.192/26'
+      }
+      {
+        name: 'DNSPrivateResolverInboundSubnet'
+        addressPrefix: '10.1.0.160/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+      {
+        name: 'DNSPrivateResolverOutboundSubnet'
+        addressPrefix: '10.1.0.176/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+    ]
     azureFirewallSettings: {
-      deployAzureFirewall: false
+      deployAzureFirewall: true
       azureFirewallName: 'afw-alz-${locationSecondary}'
       azureSkuTier: 'Standard'
       publicIPAddressObject: {
@@ -124,12 +164,12 @@ param hubNetworks = [
       }
     }
     bastionHostSettings: {
-      deployBastion: false
+      deployBastion: true
       bastionHostSettingsName: 'bas-alz-${locationSecondary}'
       skuName: 'Standard'
     }
     vpnGatewaySettings: {
-      deployVpnGateway: false
+      deployVpnGateway: true
       name: 'vgw-alz-${locationSecondary}'
       skuName: 'VpnGw1AZ'
       vpnMode: 'activeActiveBgp'
@@ -137,12 +177,12 @@ param hubNetworks = [
       asn: 65515
     }
     expressRouteGatewaySettings: {
-      deployExpressRouteGateway: false
+      deployExpressRouteGateway: true
       name: 'ergw-alz-${locationSecondary}'
     }
     privateDnsSettings: {
-      deployPrivateDnsZones: false
-      deployDnsPrivateResolver: false
+      deployPrivateDnsZones: true
+      deployDnsPrivateResolver: true
       privateDnsResolverName: 'dnspr-alz-${locationSecondary}'
       privateDnsZones: [
         'privatelink.{regionName}.azurecontainerapps.io'
