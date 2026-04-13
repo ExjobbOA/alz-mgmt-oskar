@@ -50,13 +50,13 @@ on:
 
 jobs:
   plan_and_apply:
-    uses: ExjobbOA/alz-mgmt-templates/.github/workflows/cd-template.yaml@main
+    uses: ExjobbOA/alz-mgmt-templates/.github/workflows/cd-template.yaml@v1.0.0
     name: 'CD'
     permissions:
       id-token: write
       contents: read
     with:
-      platform_ref: main
+      platform_ref: v1.0.0
       parameters_file_name: config/platform.json
       skip_what_if: ${{ inputs.skip_what_if }}
       governance-int-root: ${{ inputs.governance-int-root }}

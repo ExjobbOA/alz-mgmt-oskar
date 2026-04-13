@@ -42,6 +42,9 @@ param parPolicyAssignmentParameterOverrides = {
       ddosPlan: {
         value: ddosResourceId
       }
+      effect: {
+        value: 'Audit'
+      }
     }
   }
 }
