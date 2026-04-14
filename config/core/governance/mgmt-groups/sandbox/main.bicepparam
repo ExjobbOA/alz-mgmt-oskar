@@ -4,6 +4,7 @@ var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
 var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNameSandbox     = readEnvironmentVariable('MG_NAME_SANDBOX', 'sandbox')
 
 param parLocations = [
   location
@@ -13,7 +14,7 @@ param parEnableTelemetry = enableTelemetry
 
 param sandboxConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'sandbox'
+  managementGroupName: mgNameSandbox
   managementGroupParentId: intRootMgId
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Sandbox'

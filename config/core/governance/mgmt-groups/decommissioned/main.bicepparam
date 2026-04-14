@@ -3,7 +3,8 @@ using '../../../../../platform/templates/core/governance/mgmt-groups/decommissio
 var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
-var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var intRootMgId           = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNameDecommissioned  = readEnvironmentVariable('MG_NAME_DECOMMISSIONED', 'decommissioned')
 
 param parLocations = [
   location
@@ -13,7 +14,7 @@ param parEnableTelemetry = enableTelemetry
 
 param decommissionedConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'decommissioned'
+  managementGroupName: mgNameDecommissioned
   managementGroupParentId: intRootMgId
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Decommissioned'

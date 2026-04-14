@@ -3,7 +3,9 @@ using '../../../../../../platform/templates/core/governance/mgmt-groups/landingz
 var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
-var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var intRootMgId        = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNameLandingzones = readEnvironmentVariable('MG_NAME_LANDINGZONES', 'landingzones')
+var mgNameOnline       = readEnvironmentVariable('MG_NAME_ONLINE', 'online')
 
 param parLocations = [
   location
@@ -13,8 +15,8 @@ param parEnableTelemetry = enableTelemetry
 
 param landingZonesOnlineConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'online'
-  managementGroupParentId: 'landingzones'
+  managementGroupName: mgNameOnline
+  managementGroupParentId: mgNameLandingzones
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Online'
   managementGroupDoNotEnforcePolicyAssignments: []
