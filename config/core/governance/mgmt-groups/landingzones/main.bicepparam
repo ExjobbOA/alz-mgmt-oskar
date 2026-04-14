@@ -4,6 +4,7 @@ var location                    = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary           = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry             = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
 var intRootMgId                 = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNameLandingzones          = readEnvironmentVariable('MG_NAME_LANDINGZONES', 'landingzones')
 var subIdMgmt                   = readEnvironmentVariable('SUBSCRIPTION_ID_MANAGEMENT')
 var subIdConn                   = readEnvironmentVariable('SUBSCRIPTION_ID_CONNECTIVITY')
 var rgLogging                   = 'rg-alz-logging-${location}'
@@ -28,7 +29,7 @@ param parEnableTelemetry = enableTelemetry
 
 param landingZonesConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'landingzones'
+  managementGroupName: mgNameLandingzones
   managementGroupParentId: intRootMgId
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Landing Zones'
