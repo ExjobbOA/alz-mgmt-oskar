@@ -3,8 +3,10 @@ using '../../../../../../platform/templates/core/governance/mgmt-groups/landingz
 var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
-var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
-var subIdConn         = readEnvironmentVariable('SUBSCRIPTION_ID_CONNECTIVITY')
+var intRootMgId        = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNameLandingzones = readEnvironmentVariable('MG_NAME_LANDINGZONES', 'landingzones')
+var mgNameCorp         = readEnvironmentVariable('MG_NAME_CORP', 'corp')
+var subIdConn          = readEnvironmentVariable('SUBSCRIPTION_ID_CONNECTIVITY')
 var rgDns             = 'rg-alz-dns-${location}'
 var dnsPrefixId       = '/subscriptions/${subIdConn}/resourceGroups/${rgDns}/providers/Microsoft.Network/privateDnsZones/'
 
@@ -16,8 +18,8 @@ param parEnableTelemetry = enableTelemetry
 
 param landingZonesCorpConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'corp'
-  managementGroupParentId: 'landingzones'
+  managementGroupName: mgNameCorp
+  managementGroupParentId: mgNameLandingzones
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Corp'
   managementGroupDoNotEnforcePolicyAssignments: []
