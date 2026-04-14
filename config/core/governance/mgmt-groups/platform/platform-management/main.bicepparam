@@ -3,7 +3,9 @@ using '../../../../../../platform/templates/core/governance/mgmt-groups/platform
 var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
-var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var intRootMgId      = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNamePlatform   = readEnvironmentVariable('MG_NAME_PLATFORM', 'platform')
+var mgNameManagement = readEnvironmentVariable('MG_NAME_MANAGEMENT', 'management')
 
 param parLocations = [
   location
@@ -13,8 +15,8 @@ param parEnableTelemetry = enableTelemetry
 
 param platformManagementConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'management'
-  managementGroupParentId: 'platform'
+  managementGroupName: mgNameManagement
+  managementGroupParentId: mgNamePlatform
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Management'
   managementGroupDoNotEnforcePolicyAssignments: []

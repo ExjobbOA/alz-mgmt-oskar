@@ -3,8 +3,10 @@ using '../../../../../../platform/templates/core/governance/mgmt-groups/platform
 var location          = readEnvironmentVariable('LOCATION_PRIMARY')
 var locationSecondary = readEnvironmentVariable('LOCATION_SECONDARY', '')
 var enableTelemetry   = bool(readEnvironmentVariable('ENABLE_TELEMETRY', 'true'))
-var intRootMgId       = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
-var subIdConn         = readEnvironmentVariable('SUBSCRIPTION_ID_CONNECTIVITY')
+var intRootMgId        = readEnvironmentVariable('INTERMEDIATE_ROOT_MANAGEMENT_GROUP_ID')
+var mgNamePlatform     = readEnvironmentVariable('MG_NAME_PLATFORM', 'platform')
+var mgNameConnectivity = readEnvironmentVariable('MG_NAME_CONNECTIVITY', 'connectivity')
+var subIdConn          = readEnvironmentVariable('SUBSCRIPTION_ID_CONNECTIVITY')
 var rgConn            = 'rg-alz-conn-${location}'
 var ddosResourceId    = '/subscriptions/${subIdConn}/resourceGroups/${rgConn}/providers/Microsoft.Network/ddosProtectionPlans/ddos-alz-${location}'
 
@@ -16,8 +18,8 @@ param parEnableTelemetry = enableTelemetry
 
 param platformConnectivityConfig = {
   createOrUpdateManagementGroup: true
-  managementGroupName: 'connectivity'
-  managementGroupParentId: 'platform'
+  managementGroupName: mgNameConnectivity
+  managementGroupParentId: mgNamePlatform
   managementGroupIntermediateRootName: intRootMgId
   managementGroupDisplayName: 'Connectivity'
   managementGroupDoNotEnforcePolicyAssignments: []
