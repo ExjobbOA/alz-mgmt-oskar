@@ -23,7 +23,10 @@ param intRootConfig = {
   managementGroupParentId: mgRootId
   managementGroupDisplayName: 'Azure Landing Zones'
   managementGroupDoNotEnforcePolicyAssignments: []
-  managementGroupExcludedPolicyAssignments: []
+  // Temporary workaround: 'Enforce-EncryptTransit' has a case-sensitivity bug in the ALZ library
+  // where the policy set sends effect 'deny' but the built-in policy definition requires 'Deny'.
+  // Remove this exclusion once the library is updated with the fix.
+  managementGroupExcludedPolicyAssignments: ['Enforce-EncryptTransit']
   customerRbacRoleDefs: []
   customerRbacRoleAssignments: []
   customerPolicyDefs: []
