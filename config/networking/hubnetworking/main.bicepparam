@@ -128,7 +128,7 @@ param hubNetworks = [
         useRemoteGateways: false
       }
     ]
-    /*
+    
     subnets: [
       /*
       {
