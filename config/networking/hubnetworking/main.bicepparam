@@ -128,8 +128,9 @@ param hubNetworks = [
         useRemoteGateways: false
       }
     ]
-    /*
+    
     subnets: [
+      /*
       {
         name: 'AzureBastionSubnet'
         addressPrefix: '10.1.0.64/26'
@@ -156,8 +157,9 @@ param hubNetworks = [
         addressPrefix: '10.1.0.176/28'
         delegation: 'Microsoft.Network/dnsResolvers'
       }
-    ]
       */
+    ]
+      
     azureFirewallSettings: {
       deployAzureFirewall: false
       azureFirewallName: 'afw-alz-${locationSecondary}'
