@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate_and_plan:
-    uses: ExjobbOA/alz-mgmt-templates/.github/workflows/ci-template.yaml@v1.1.1
+    uses: ExjobbOA/alz-mgmt-templates/.github/workflows/ci-template.yaml@v1.1.2
     name: "CI"
     permissions:
       id-token: write
